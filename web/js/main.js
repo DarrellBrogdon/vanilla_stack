@@ -40,18 +40,18 @@ const pathToRegex = path => new RegExp("^" + path.replace(/\//g, "\\/").replace(
 
 window.router = async () => {
     const routes = [
-        {view: Login},
-        {view: Home},
-        {view: Account},
-        {view: About},
-        {view: PasswordReset},
-        {view: CreateProfile},
+        Login,
+        Home,
+        Account,
+        About,
+        PasswordReset,
+        CreateProfile,
     ]
 
     const potentialMatches = routes.map(route => {
         return {
             route,
-            result: location.pathname.match(pathToRegex(route.view.path))
+            result: location.pathname.match(pathToRegex(route.path))
         }
     })
 
@@ -61,14 +61,14 @@ window.router = async () => {
     //   1. Route not found 
     //   2. No cookie was found AND the page requested doesn't require authentication to access
     //      e.g.; Login, PasswordReset, etc...
-    if (!match || (!getCookie('authentication_token') && match.route.view.authRequired)) {
+    if (!match || (!getCookie('authentication_token') && match.route.authRequired)) {
         match = {
             route: routes[0],
             result: [location.pathname]
         }
     }
 
-    await new match.route.view(getParams(match)).getHtml()
+    await new match.route(getParams(match)).getHtml()
 }
 
 /**
@@ -85,7 +85,7 @@ window.navigateTo = url => {
 
 const getParams = match => {
     const values = match.result.slice(1)
-    const keys = Array.from(match.route.view.path.matchAll(/:(\w+)/g))
+    const keys = Array.from(match.route.path.matchAll(/:(\w+)/g))
 
     return Object.fromEntries(keys.map((key, i) => {
         return [key, values[i]]
