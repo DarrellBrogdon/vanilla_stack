@@ -1,4 +1,5 @@
 import AbstractView from "./AbstractView.js"
+import Nav from './Nav.js'
 
 export default class extends AbstractView {
     page = 'Account'
@@ -10,6 +11,7 @@ export default class extends AbstractView {
 
     async getHtml() {
         await super.getHtml(this.page.toLowerCase())
+        new Nav('account')
 
         fetch('/api/1.0/account', {
             method: 'GET',

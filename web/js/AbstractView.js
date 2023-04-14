@@ -24,6 +24,18 @@ export default class {
     }
 
     /**
+     * getComponent - Load a component and add it to the DOM at the given selector location.
+     * 
+     * @param {String} name The name of the component to load
+     * @param {String} selector The selector for the element to add the component to
+     */
+    async getComponent(name, selector) {
+        await fetch(`${window.location.origin}/${name}.php`)
+            .then(result => result.text())
+            .then(content => document.querySelector(selector).innerHTML = content)
+    }
+
+    /**
      * Dynamically bind values to elements
      * 
      * This method binds the value from an object to elements with a `data-key` attribute.
