@@ -1,6 +1,9 @@
 import AbstractView from "./AbstractView.js"
 
 export default class extends AbstractView {
+    static path = '/password-reset'
+    static authRequired = false
+
     page = 'Password Reset'
 
     constructor(params) {

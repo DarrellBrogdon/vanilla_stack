@@ -1,6 +1,9 @@
 import AbstractView from "./AbstractView.js"
 
 export default class extends AbstractView {
+    static path = '/create-profile'
+    static authRequired = false
+
     page = 'Create Profile'
 
     constructor(params) {

@@ -1,6 +1,9 @@
 import AbstractView from "./AbstractView.js"
 
 export default class extends AbstractView {
+    static path = '/'
+    static authRequired = false
+
     page = 'Login'
     
     constructor(params) {

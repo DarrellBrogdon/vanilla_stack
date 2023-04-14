@@ -2,6 +2,9 @@ import AbstractView from "./AbstractView.js"
 import Nav from './Nav.js'
 
 export default class extends AbstractView {
+    static path = '/account'
+    static authRequired = true
+
     page = 'Account'
     
     constructor(params) {
